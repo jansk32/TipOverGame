@@ -7,12 +7,15 @@ class Block:
         self.numberOfBlocks = numberOfBlocks #int
         self.currPos = currPos # Tuple (x,y)
     
-    ## Where the actual toppling happens
+    ## Where the actual toppling happens, assume check is already done
     ## y and x are reversed
     def topple(self, board, direction):
         (x,y) = self.currPos
+
+        ## finds object with current position corrdinates, then deletes
         delCurrBlock = board.findBlockWithCoor(self.currPos)
         del board[delCurrBlock]
+
         if direction == Direction.DOWN:
             for i in range(numberOfBlocks):
                 newX = x + i
