@@ -24,11 +24,24 @@ class Board:
                 init_board[b] = EMPTY
         self.board = init_board
 
+    ## Print the board
     def print_board(self):
         grids = sorted(self.buildListOfTupleBoard())
         string = ""
         for i in range(len(grids)):
             string += str(grids[i][1])
+            if i % 6 == 5:
+                string += "\n"
+            else:
+                string += " "
+        print(string)
+
+    ## Print board coordinates (for ref)
+    def print_board_coor(self):
+        grids = sorted(self.buildListOfTupleBoard())
+        string = ""
+        for i in range(len(grids)):
+            string += str(grids[i][0])
             if i % 6 == 5:
                 string += "\n"
             else:
@@ -62,6 +75,7 @@ class Board:
         for item in grid:
             arr.append(toTuple(item))
         return arr
+
 
 def toTuple(item):
     (block, val) = item

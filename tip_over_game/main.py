@@ -11,6 +11,8 @@ def main():
 
     new_board.setUp(3, (5,5))
     new_board.setUp('X', char.currPos)
+    new_board.print_board_coor()
+    print("\n")
     new_board.print_board()
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
