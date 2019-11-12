@@ -20,7 +20,7 @@ class Block:
                     newCoor = (newX,y)
                     delBlock = board.findBlockWithCoor(newCoor)
                     del board[delBlock]
-                    board[Block(1, newCoor)] = "[1]"
+                    board[Block(1, newCoor)] = [1]
                     
             return board
 
@@ -31,7 +31,7 @@ class Block:
                     newCoor = (x,newY)
                     delBlock = board.findBlockWithCoor(newCoor)
                     del board[delBlock]
-                    board[Block(1, newCoor)] = "[1]"
+                    board[Block(1, newCoor)] = [1]
                     
             return board
 
@@ -42,7 +42,7 @@ class Block:
                     newCoor = (x,newY)
                     delBlock = board.findBlockWithCoor(newCoor)
                     del board[delBlock]
-                    board[Block(1, newCoor)] = "[1]"
+                    board[Block(1, newCoor)] = [1]
                     
             return board
         
@@ -53,7 +53,7 @@ class Block:
                     newCoor = (newX,y)
                     delBlock = board.findBlockWithCoor(newCoor)
                     del board[delBlock]
-                    board[Block(1, newCoor)]
+                    board[Block(1, newCoor)] = [1]
                     
             return board
     

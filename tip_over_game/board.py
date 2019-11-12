@@ -1,6 +1,6 @@
 from block import Block
 
-EMPTY = "[0]"
+EMPTY = [0]
 '''
         for i in range(0,6):
             arr = []
@@ -52,7 +52,7 @@ class Board:
         ## This is to give coordinates new elements or blocks
         ## ONLY if they have a [0]
         delBlock = self.findBlockWithCoor(coor)
-        if self.board[delBlock] == "[0]":
+        if self.board[delBlock] == [0]:
             del self.board[delBlock]
         else:
             return
