@@ -47,10 +47,10 @@ class Board:
             else:
                 string += " "
         print(string)
-       
+    
+    ## This is to give coordinates new elements or blocks
+    ## ONLY if they have a [0]
     def setUp(self, blockNumber, coor):
-        ## This is to give coordinates new elements or blocks
-        ## ONLY if they have a [0]
         delBlock = self.findBlockWithCoor(coor)
         if self.board[delBlock] == [0]:
             del self.board[delBlock]
@@ -58,10 +58,9 @@ class Board:
             return
         self.board[Block(blockNumber, coor)] = [blockNumber]
 
-
+    ## Keep in mind board is a Dictionary of [0]
+    ## Convert dictionary keys into a list, delete fro there
     def findBlockWithCoor(self,coor):
-        ## Keep in mind board is a Dictionary of [0]
-        ## Convert dictionary keys into a list, delete fro there
         arrBoard = list(self.board.keys())
         for i in range(len(arrBoard)):
             currBlock = arrBoard[i]
@@ -69,6 +68,7 @@ class Board:
                 return arrBoard[i]
         return None
 
+    ## convert board to tuple 
     def buildListOfTupleBoard(self):
         arr = []
         grid = list(self.board.items())
