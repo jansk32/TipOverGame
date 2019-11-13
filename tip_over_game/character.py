@@ -44,17 +44,16 @@ class Character:
         ## check if numberofsquare equals diff of x1 and x2 or y1 and y2
             if(Math.abs(x1 - x2) == numberOfSquare 
             or Math.abs(y1- y2) == numberOfSquare):
-                return True
-        ## check if along the route, is there any blocks
-        if (direction == direction.DOWN):
-            return checkDown(x1,x2,y1,curr_board)
-        elif (direction == direction.UP):
-            return checkUp(x1,x2,y1,curr_board)
-        elif (direction == direction.LEFT):
-            return checkLeft(y1,y2,x1,curr_board)
-        elif (direction == direction.RIGHT):
-            return checkRight(y1,y2,x1,curr_board)
-
+                ## check if along the route, is there any blocks
+                if (direction == direction.DOWN):
+                    return checkDown(x1,x2,y1,curr_board)
+                elif (direction == direction.UP):
+                    return checkUp(x1,x2,y1,curr_board)
+                elif (direction == direction.LEFT):
+                    return checkLeft(y1,y2,x1,curr_board)
+                elif (direction == direction.RIGHT):
+                    return checkRight(y1,y2,x1,curr_board)
+        return False
 
     ## Checks for blocks while toppling
 def checkUp(x1,x2,y1,board):

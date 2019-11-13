@@ -7,15 +7,23 @@ def main():
     complete = False
     new_board = Board()
     new_board.build_empty_board()
+    finishCoor = (5,3)
     char = Character((2,3))
 
-    new_board.setUp(3, (5,5))
-    new_board.setUp('X', char.currPos)
+    ## new_board.setUp('X', char.currPos)
+    ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
+    new_board.setUp(4, (1,5))
+    new_board.setUp(2, (2,5))
+    new_board.setUp(2, (5,0))
+    new_board.setUp(3, (1,0))
+    new_board.setUp(1, finishCoor)
+
     new_board.print_board_coor()
     print("\n")
     new_board.print_board()
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
+        print(dir)
 
         ## move should return a new board
         ## new_board = char.move(new_board, dir)
