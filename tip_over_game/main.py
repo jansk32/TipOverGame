@@ -8,7 +8,6 @@ def main():
     new_board = Board()
     new_board.build_empty_board()
     finishCoor = (5,3)
-    char = Character((2,3))
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
@@ -18,6 +17,8 @@ def main():
     new_board.setUp(3, (1,0))
     new_board.setUp(1, finishCoor)
 
+    ## Add Character
+    new_board.addChar((1,5))
     new_board.print_board_coor()
     print("\n")
     new_board.print_board()

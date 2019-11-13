@@ -1,5 +1,6 @@
 from block import Block
 
+
 EMPTY = [0]
 '''
         for i in range(0,6):
@@ -12,7 +13,6 @@ class Board:
     
     def __init__(self):
         self.board = {}
-        #self.charCoor = charCoor
         self.start = (0,0)
         self.finish = (3,4)
     
@@ -76,6 +76,15 @@ class Board:
             arr.append(toTuple(item))
         return arr
 
+    ## Add character
+    def addChar(self, coor):
+        charBlock = self.findBlockWithCoor(coor)
+        arr = list(self.board[charBlock]).copy()
+        arr.append("X")
+        del self.board[charBlock]
+        self.board[Block(1,coor)] = arr
+        
+        
 
 def toTuple(item):
     (block, val) = item
