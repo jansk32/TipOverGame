@@ -1,4 +1,5 @@
 from block import Block
+from character import Character
 
 
 EMPTY = [0]
@@ -33,7 +34,7 @@ class Board:
             if i % 6 == 5:
                 string += "\n"
             else:
-                string += " "
+                string += "   "
         print(string)
 
     ## Print board coordinates (for ref)

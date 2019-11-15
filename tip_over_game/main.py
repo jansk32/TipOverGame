@@ -18,7 +18,10 @@ def main():
     new_board.setUp(1, finishCoor)
 
     ## Add Character
+    ## Character class only tracks the "X"
+    char = Character((1,5))
     new_board.addChar((1,5))
+    
     new_board.print_board_coor()
     print("\n")
     new_board.print_board()

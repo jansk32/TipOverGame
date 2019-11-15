@@ -6,11 +6,7 @@ class Character:
     
     def move(self,board, direction):
         if (direction == Direction.DOWN):
-            (x,y) = self.currPos
-            del board[(self.currPos)]
-            self.currPos = (x,y-1)
-            board[(self.currPos)] = ["X"]
-            return board
+            return
 
         elif (direction == Direction.LEFT):
             return
