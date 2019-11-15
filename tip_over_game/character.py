@@ -1,12 +1,22 @@
 from direction import Direction
+from block import Block
 
 class Character:
     def __init__(self, currPos):
         self.currPos = currPos
     
-    def move(self,board, direction):
+    def move(self,boardObj, direction):
+        (x,y) = self.currPos
         if (direction == Direction.DOWN):
-            return
+            nextCoor = (x+1, y)
+            down = boardObj.findBlockWithCoor(nextCoor)
+            if (boardObj.board[down] != [0]):
+                arr = list(boardObj.board[down]).copy()
+                arr.remove("X")
+                del boardObj.board[down]
+                boardObj.board[Block()] = arr
+                boardObj.board.addChar(nextCoor)
+                
 
         elif (direction == Direction.LEFT):
             return
@@ -18,7 +28,7 @@ class Character:
             return 
     
     def topple(self, board, direction):
-        [ numberOfSquare ] = board[self.currPos]
+        numberOfBlocks = board[self.currPos][0]
         if (direction == Direction.DOWN):
             return
 

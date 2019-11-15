@@ -30,7 +30,8 @@ def main():
         print(dir)
 
         ## move should return a new board
-        ## new_board = char.move(new_board, dir)
+        char.move(new_board, dir)
+        new_board.print_board()
 
 def dirConvert(dir):
     dir = dir.lower()
