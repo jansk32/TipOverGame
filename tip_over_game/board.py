@@ -16,6 +16,7 @@ class Board:
         ## self.board = {}
         self.board = []
         self.start = (0,0)
+        self.char = (1,5)
         self.finish = (3,4)
     
     def build_empty_board(self):
@@ -50,6 +51,11 @@ class Board:
             else:
                 string += " "
         print(string)
+    
+    ## Print out the curr number of blocks under the char
+    def print_block_number(self):
+        ind = self.findBlockWithCoor(self.char)
+        print("Number of blocks under X is: ", self.board[ind].getNumBlocks())
     
     ## This is to give coordinates new elements or blocks
     ## ONLY if they have a [0]

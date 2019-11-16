@@ -25,6 +25,7 @@ def main():
     new_board.print_board_coor()
     print("\n")
     new_board.print_board()
+    new_board.print_block_number()
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
         print(dir)
