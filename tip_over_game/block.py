@@ -4,6 +4,7 @@ from direction import Direction
 
 class Block:
     def __init__(self, numberOfBlocks, currPos):
+        self.isChar = False
         self.numberOfBlocks = numberOfBlocks #int
         self.currPos = currPos # Tuple (x,y)
     
@@ -67,3 +68,15 @@ class Block:
     # Get number of Blocks
     def getNumBlocks(self):
         return self.numberOfBlocks
+
+    # Set number of blocks
+    def setNumBlocks(self, num):
+        self.numberOfBlocks = num
+    
+    # Get whether they have a char in the spot
+    def getChar(self):
+        return self.isChar
+    
+    # Setter for a character (on and off switch)
+    def setChar(self):
+        self.isChar = not (self.isChar)
