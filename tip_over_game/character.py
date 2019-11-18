@@ -4,18 +4,51 @@ class Character:
     def __init__(self, currPos):
         self.currPos = currPos
     
-    def move(self,board, direction):
+    def move(self,boardObj, direction):
+        (x,y) = self.currPos
         if (direction == Direction.DOWN):
-            return
+            nextCoor = (x+1,y)
+            b_start = boardObj.findBlockWithCoor(self.currPos)
+            b_end = boardObj.findBlockWithCoor(nextCoor)
+            if(x+1 < 6):
+                ## Unset the current coor
+                self.setCoor(nextCoor)
+                boardObj.board[b_start].setChar()
+                boardObj.board[b_end].setChar()
+            return boardObj
 
         elif (direction == Direction.LEFT):
-            return
+            nextCoor = (x,y-1)
+            b_start = boardObj.findBlockWithCoor(self.currPos)
+            b_end = boardObj.findBlockWithCoor(nextCoor)
+            if(y-1 >= 0):
+                ## Unset the current coor
+                self.setCoor(nextCoor)
+                boardObj.board[b_start].setChar()
+                boardObj.board[b_end].setChar()
+            return boardObj
 
         elif (direction == Direction.RIGHT):
-            return
+            nextCoor = (x,y+1)
+            b_start = boardObj.findBlockWithCoor(self.currPos)
+            b_end = boardObj.findBlockWithCoor(nextCoor)
+            if(y+1 < 6):
+                ## Unset the current coor
+                self.setCoor(nextCoor)
+                boardObj.board[b_start].setChar()
+                boardObj.board[b_end].setChar()
+            return boardObj
         
         elif (direction == Direction.UP):
-            return 
+            nextCoor = (x-1,y)
+            b_start = boardObj.findBlockWithCoor(self.currPos)
+            b_end = boardObj.findBlockWithCoor(nextCoor)
+            if(x-1 < 6):
+                ## Unset the current coor
+                self.setCoor(nextCoor)
+                boardObj.board[b_start].setChar()
+                boardObj.board[b_end].setChar()
+            return boardObj
     
     def topple(self, board, direction):
         [ numberOfSquare ] = board[self.currPos]
@@ -53,6 +86,9 @@ class Character:
     
     def getCoor(self):
         return self.currPos
+    
+    def setCoor(self, coor):
+        self.currPos = coor
 
     ## Checks for blocks while toppling
 def checkUp(x1,x2,y1,board):

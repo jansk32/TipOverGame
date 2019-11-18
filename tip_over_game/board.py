@@ -100,7 +100,8 @@ class Board:
         #del self.board[charBlock]
         #self.board[Block(1,coor)] = arr
         
-        
+    def moveChar(self, direction):
+        return self.char.move(self,direction)
 
 def toTuple(item):
     block = item

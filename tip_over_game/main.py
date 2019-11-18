@@ -18,8 +18,6 @@ def main():
     new_board.setUp(3, (1,0))
     new_board.setUp(1, finishCoor)
 
-    ## Add Character
-    ## Character class only tracks the "X"
     
     new_board.print_board_coor()
     print("\n")
@@ -30,7 +28,8 @@ def main():
         print(dir)
 
         ## move should return a new board
-        ## new_board = char.move(new_board, dir)
+        new_board = new_board.moveChar(dir)
+        new_board.print_board()
 
 def dirConvert(dir):
     dir = dir.lower()
