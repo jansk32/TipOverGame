@@ -50,6 +50,9 @@ class Character:
                 elif (direction == direction.RIGHT):
                     return checkRight(y1,y2,x1,curr_board)
         return False
+    
+    def getCoor(self):
+        return self.currPos
 
     ## Checks for blocks while toppling
 def checkUp(x1,x2,y1,board):

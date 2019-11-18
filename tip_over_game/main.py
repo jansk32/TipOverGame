@@ -5,7 +5,8 @@ from character import Character
 
 def main():
     complete = False
-    new_board = Board()
+    char = Character((1,5))
+    new_board = Board(char)
     new_board.build_empty_board()
     finishCoor = (5,3)
 
@@ -19,8 +20,6 @@ def main():
 
     ## Add Character
     ## Character class only tracks the "X"
-    char = Character((1,5))
-    new_board.addChar((1,5))
     
     new_board.print_board_coor()
     print("\n")
