@@ -15,6 +15,8 @@ class Character:
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
                 boardObj.board[b_end].setChar()
+            if(boardObj.board[b_end].getNumBlocks() == 0):
+                self.topple(boardObj,Direction.DOWN)
             return boardObj
 
         elif (direction == Direction.LEFT):
@@ -50,10 +52,19 @@ class Character:
                 boardObj.board[b_end].setChar()
             return boardObj
     
-    def topple(self, board, direction):
-        [ numberOfSquare ] = board[self.currPos]
+    def topple(self, boardObj, direction):
+        blockInd = boardObj.findBlockWithCoor(self.currPos)
+        currBlock = boardObj.board[blockInd]
         if (direction == Direction.DOWN):
-            return
+            (x1,y1) = self.currPos
+            x2 = x1 + currBlock.getNumBlocks() - 1 
+            (check, arr) = checkDown(x1,x2,y1,boardObj)
+            if (check == True):
+                for i in arr:
+                    boardObj.board[i].setNumBlocks(1)
+                currBlock.setNumBlocks(0)
+                
+            return boardObj
 
         elif (direction == Direction.LEFT):
             return
@@ -63,10 +74,10 @@ class Character:
         
         elif (direction == Direction.UP):
             return 
-    
-    def checkTopple(coor, final_coor, numberOfSquare, direction, curr_board):
+
+    '''
+    def checkTopple(coor, numberOfSquare, direction, curr_board):
         (x1,y1) = coor
-        (x2,y2) = final_coor
 
         ## check if it is outside of the board
         if (x2 < 6 or x2 >= 0 or y2 < 6 or y2 >= 0) :
@@ -83,7 +94,7 @@ class Character:
                 elif (direction == direction.RIGHT):
                     return checkRight(y1,y2,x1,curr_board)
         return False
-    
+    '''
     def getCoor(self):
         return self.currPos
     
@@ -91,24 +102,32 @@ class Character:
         self.currPos = coor
 
     ## Checks for blocks while toppling
-def checkUp(x1,x2,y1,board):
+def checkUp(x1,x2,y1,boardObj):
     for i in range(x1+1, x2+1):
-        if(board[(i,y1)]) != []:
+        l = boardObj.findBlockWithCoor((i,y1))
+        if(boardObj.board[l].getNumBlocks()) != 0:
             return False
     return True
 
-def checkRight(y1,y2, x1, board):
+def checkRight(y1,y2, x1, boardObj):
     for i in range(y1+1, y2+1):
-        if(board[(x1,i)]) != []:
+        l = boardObj.findBlockWithCoor((x1,i))
+        if(boardObj.board[l].getNumBlocks()) != 0:
             return False
     return True
-def checkDown(x1,x2,y1,board):
-    for i in range(x2, x1-1, -1):
-        if(board[(i,y1)]) != []:
-            return False
-    return True
-def checkLeft(y1,y2, x1, board):
+
+def checkDown(x1,x2,y1,boardObj):
+    checked = []
+    for i in range(x2+1, x1, -1):
+        l = boardObj.findBlockWithCoor((i,y1))
+        checked.append(l)
+        if(boardObj.board[l].getNumBlocks()) != 0:
+            return (False, [])
+    return (True, checked)
+
+def checkLeft(y1,y2, x1, boardObj):
     for i in range(y2, y1-1, -1):
-        if(board[(x1,i)]) != []:
+        l = boardObj.findBlockWithCoor((x1,i))
+        if(boardObj.board[l].getNumBlocks()) != 0:
             return False
     return True
