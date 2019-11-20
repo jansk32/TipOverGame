@@ -26,11 +26,12 @@ def main():
     new_board.print_block_number()
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
-        print(dir)
+        # print(dir)
 
         ## move should return a new board
         new_board = new_board.moveChar(dir)
         new_board.print_board()
+        new_board.print_block_number()
 
 def dirConvert(dir):
     dir = dir.lower()

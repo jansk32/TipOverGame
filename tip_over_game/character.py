@@ -17,6 +17,9 @@ class Character:
                 boardObj.board[b_end].setChar()
             if(boardObj.board[b_end].getNumBlocks() == 0):
                 self.topple(boardObj,Direction.DOWN)
+                self.setCoor(nextCoor)
+                boardObj.board[b_start].setChar()
+                boardObj.board[b_end].setChar()
             return boardObj
 
         elif (direction == Direction.LEFT):
@@ -63,6 +66,7 @@ class Character:
                 for i in arr:
                     boardObj.board[i].setNumBlocks(1)
                 currBlock.setNumBlocks(0)
+                
                 
             return boardObj
 
