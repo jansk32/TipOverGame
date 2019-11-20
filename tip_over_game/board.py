@@ -99,7 +99,13 @@ class Board:
         ##arr.append("X")
         #del self.board[charBlock]
         #self.board[Block(1,coor)] = arr
-        
+    
+    # Set a finish block
+    def setFinish(self, coor):
+        finishInd = self.findBlockWithCoor(coor)
+        self.board[finishInd].setFinish()
+
+    # Move Character
     def moveChar(self, direction):
         return self.char.move(self,direction)
 
@@ -107,5 +113,7 @@ def toTuple(item):
     block = item
     if block.getChar() == True:
         return (block.getCoor(), "X")
+    elif(block.getFinish() == True):
+        return (block.getCoor(), "F")
     else:
         return (block.getCoor(), block.getNumBlocks())

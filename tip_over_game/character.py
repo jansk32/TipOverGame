@@ -10,7 +10,7 @@ class Character:
             nextCoor = (x+1,y)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
-            if(x+1 < 6):
+            if(x+1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
@@ -21,7 +21,7 @@ class Character:
             nextCoor = (x,y-1)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
-            if(y-1 >= 0):
+            if(y-1 >= 0 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
@@ -32,7 +32,7 @@ class Character:
             nextCoor = (x,y+1)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
-            if(y+1 < 6):
+            if(y+1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
@@ -43,7 +43,7 @@ class Character:
             nextCoor = (x-1,y)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
-            if(x-1 < 6):
+            if(x-1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()

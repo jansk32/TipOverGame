@@ -5,6 +5,7 @@ from direction import Direction
 class Block:
     def __init__(self, numberOfBlocks, currPos):
         self.isChar = False
+        self.isFinish = False
         self.numberOfBlocks = numberOfBlocks #int
         self.currPos = currPos # Tuple (x,y)
     
@@ -80,3 +81,11 @@ class Block:
     # Setter for a character (on and off switch)
     def setChar(self):
         self.isChar = not (self.isChar)
+    
+    # Get whether it is a finish block
+    def getFinish(self):
+        return self.isFinish
+    
+    # Set finish
+    def setFinish(self):
+        self.isFinish = True

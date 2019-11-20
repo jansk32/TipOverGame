@@ -17,6 +17,7 @@ def main():
     new_board.setUp(2, (5,0))
     new_board.setUp(3, (1,0))
     new_board.setUp(1, finishCoor)
+    new_board.setFinish(finishCoor)
 
     
     new_board.print_board_coor()
