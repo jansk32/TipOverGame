@@ -5,13 +5,14 @@ from character import Character
 
 def main():
     complete = False
-    char = Character((1,5))
+    char = Character((4,2))
     new_board = Board(char)
     new_board.build_empty_board()
     finishCoor = (5,3)
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
+    new_board.setUp(2, (4,2))
     new_board.setUp(4, (1,5))
     new_board.setUp(2, (2,5))
     new_board.setUp(2, (5,0))
@@ -24,6 +25,7 @@ def main():
     print("\n")
     new_board.print_board()
     new_board.print_block_number()
+    print("\n\n")
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
         # print(dir)
@@ -32,6 +34,14 @@ def main():
         new_board = new_board.moveChar(dir)
         new_board.print_board()
         new_board.print_block_number()
+        print("\n\n")
+
+        # Check to see if player reached goal
+        fBlock = new_board.findBlockWithCoor(finishCoor)
+        if new_board.board[fBlock].getChar() == True:
+            complete = True
+    
+    print("PUZZLE SOLVED!")
 
 def dirConvert(dir):
     dir = dir.lower()
