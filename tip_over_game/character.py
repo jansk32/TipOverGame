@@ -122,7 +122,6 @@ class Character:
 def checkUp(x1,x2,y1,boardObj):
     checked = []
     for i in range(x1-1, x2-1, -1):
-        print(i,y1)
         l = boardObj.findBlockWithCoor((i,y1))
         checked.append(l)
         if(boardObj.board[l].getNumBlocks()) != 0:

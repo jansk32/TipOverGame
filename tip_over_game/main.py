@@ -5,14 +5,13 @@ from character import Character
 
 def main():
     complete = False
-    char = Character((4,2))
+    char = Character((1,5))
     new_board = Board(char)
     new_board.build_empty_board()
     finishCoor = (5,3)
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
-    new_board.setUp(2, (4,2))
     new_board.setUp(4, (1,5))
     new_board.setUp(2, (2,5))
     new_board.setUp(2, (5,0))
