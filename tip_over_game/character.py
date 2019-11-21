@@ -3,7 +3,9 @@ from direction import Direction
 class Character:
     def __init__(self, currPos):
         self.currPos = currPos
-    
+
+
+    # Moves character and topple when possible
     def move(self,boardObj, direction):
         (x,y) = self.currPos
         if (direction == Direction.DOWN):
@@ -118,7 +120,7 @@ class Character:
     def setCoor(self, coor):
         self.currPos = coor
 
-    ## Checks for blocks while toppling
+## Checks for blocks while toppling
 def checkUp(x1,x2,y1,boardObj):
     checked = []
     for i in range(x1-1, x2-1, -1):

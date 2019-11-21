@@ -42,6 +42,7 @@ def main():
     
     print("PUZZLE SOLVED!")
 
+# Converts the letters to directions
 def dirConvert(dir):
     dir = dir.lower()
     if (dir == 'u'):
