@@ -7,10 +7,10 @@ EMPTY = [0]
 
 class Board:
     
-    def __init__(self, charac):
+    def __init__(self):
         self.board = []
         self.start = (0,0)
-        self.char = charac
+        self.char = None
         self.finish = (3,4)
     
     # Initialise board
@@ -22,7 +22,6 @@ class Board:
                 ## init_board[b] = [0]
                 init_board.append(b)
         self.board = init_board
-        self.addChar(self.char.getCoor())
 
     ## Print the board
     def print_board(self):
@@ -91,6 +90,10 @@ class Board:
     # Move Character
     def moveChar(self, direction):
         return self.char.move(self,direction)
+    
+    # Set a Character
+    def setChar(self, char):
+        self.char = char
 
 # Convert to a certain tuple format
 def toTuple(item):

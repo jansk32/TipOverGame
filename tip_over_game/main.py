@@ -1,24 +1,18 @@
 from board import Board
 from direction import Direction
 from character import Character
+import csv
 
 
 def main():
     complete = False
-    char = Character((1,5))
-    new_board = Board(char)
+    new_board = Board()
     new_board.build_empty_board()
-    finishCoor = (5,3)
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
-    new_board.setUp(4, (1,5))
-    new_board.setUp(2, (2,5))
-    new_board.setUp(2, (5,0))
-    new_board.setUp(3, (1,0))
-    new_board.setUp(1, finishCoor)
-    new_board.setFinish(finishCoor)
-
+    finishCoor = setUpGame(new_board,"level_1.csv")
+    
     
     new_board.print_board_coor()
     print("\n")
@@ -53,5 +47,39 @@ def dirConvert(dir):
         return Direction.LEFT
     elif(dir == 'r'):
         return Direction.RIGHT
+
+def setUpGame(boardObj, fileName):
+    '''
+    Format of CSV file
+    *** each Block ****
+    4,4,5 ===> numBlock, x,y
+    X,4,5 ==> Char, char coordinate
+    F,4,5 ==> Finish, finish coordinate
+    '''
+    csvFile = open(fileName, "r")
+    for line in (csv.reader(csvFile)):
+        if (line[0]== "X"):
+            x = int(line[1])
+            y = int(line[2])
+            coor = (x,y)
+            print(coor)
+            char = Character(coor)
+            boardObj.addChar(coor)
+            boardObj.setChar(char)
+        elif(line[0] == "F"):
+            x = int(line[1])
+            y = int(line[2])
+            finishCoor = (x,y)
+            boardObj.setUp(1, (x,y))
+            boardObj.setFinish((x,y))
+        else:
+            numBlock = int(line[0])
+            x = int(line[1])
+            y = int(line[2])
+            coor = (x,y)
+            boardObj.setUp(numBlock, coor)
+    csvFile.close()
+    return finishCoor
+
 if __name__ == "__main__":
     main()
