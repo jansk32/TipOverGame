@@ -1,6 +1,7 @@
 from board import Board
 from direction import Direction
 from character import Character
+from player import Player
 import csv
 
 
@@ -8,12 +9,13 @@ def main():
     complete = False
     new_board = Board()
     new_board.build_empty_board()
+    
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
     finishCoor = setUpGame(new_board,"level_1.csv")
     
-    
+    player = Player(new_board)
     new_board.print_board_coor()
     print("\n")
     new_board.print_board()
@@ -21,6 +23,9 @@ def main():
     print("\n\n")
     while complete == False:
         dir = dirConvert(input("Next Move (U,L,R,or D):"))
+        if dir == None:
+            continue
+        #dir = player.astar(new_board)
         # print(dir)
 
         ## move should return a new board
@@ -47,6 +52,8 @@ def dirConvert(dir):
         return Direction.LEFT
     elif(dir == 'r'):
         return Direction.RIGHT
+    else:
+        return None
 
 def setUpGame(boardObj, fileName):
     '''
