@@ -12,6 +12,8 @@ class Character:
             nextCoor = (x+1,y)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
+            if b_end == None:
+                return boardObj
             if(x+1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
@@ -29,6 +31,8 @@ class Character:
             nextCoor = (x,y-1)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
+            if b_end == None:
+                return boardObj
             if(y-1 >= 0 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
@@ -46,6 +50,8 @@ class Character:
             nextCoor = (x,y+1)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
+            if b_end == None:
+                return boardObj
             if(y+1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
@@ -63,6 +69,8 @@ class Character:
             nextCoor = (x-1,y)
             b_start = boardObj.findBlockWithCoor(self.currPos)
             b_end = boardObj.findBlockWithCoor(nextCoor)
+            if b_end == None:
+                return boardObj
             if(x-1 < 6 and boardObj.board[b_end].getNumBlocks() > 0):
                 ## Unset the current coor
                 self.setCoor(nextCoor)
@@ -125,34 +133,38 @@ def checkUp(x1,x2,y1,boardObj):
     checked = []
     for i in range(x1-1, x2-1, -1):
         l = boardObj.findBlockWithCoor((i,y1))
-        checked.append(l)
-        if(boardObj.board[l].getNumBlocks()) != 0:
+        if(l == None or boardObj.board[l].getNumBlocks()) != 0 :
             return (False, [])
+        else:
+            checked.append(l)
     return (True, sorted(checked, reverse=True))
 
 def checkRight(y1,y2, x1, boardObj):
     checked = []
     for i in range(y1+1, y2+1):
         l = boardObj.findBlockWithCoor((x1,i))
-        checked.append(l)
-        if(boardObj.board[l].getNumBlocks()) != 0:
+        if(l == None or boardObj.board[l].getNumBlocks()) != 0:
             return (False,[])
+        else:
+            checked.append(l)
     return (True, checked)
 
 def checkDown(x1,x2,y1,boardObj):
     checked = []
     for i in range(x2+1, x1, -1):
         l = boardObj.findBlockWithCoor((i,y1))
-        checked.append(l)
-        if(boardObj.board[l].getNumBlocks()) != 0:
+        if(l == None or boardObj.board[l].getNumBlocks()) != 0:
             return (False, [])
+        else:
+            checked.append(l)
     return (True, checked)
 
 def checkLeft(y1,y2, x1, boardObj):
     checked = []
     for i in range(y2, y1):
         l = boardObj.findBlockWithCoor((x1,i))
-        checked.append(l)
-        if(boardObj.board[l].getNumBlocks()) != 0:
+        if(l == None or boardObj.board[l].getNumBlocks()) != 0:
             return (False, [])
+        else:
+            checked.append(l)
     return (True, sorted(checked, reverse= True))
