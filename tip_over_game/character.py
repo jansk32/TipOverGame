@@ -19,7 +19,7 @@ class Character:
                 boardObj.board[b_end].setChar()
             if(boardObj.board[b_end].getNumBlocks() == 0 and 
             boardObj.board[b_start].getNumBlocks() > 1):
-                self.topple(boardObj,Direction.DOWN)
+                topple(self.currPos, boardObj,Direction.DOWN)
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
                 boardObj.board[b_end].setChar()
@@ -36,7 +36,7 @@ class Character:
                 boardObj.board[b_end].setChar()
             if(boardObj.board[b_end].getNumBlocks() == 0 and
             boardObj.board[b_start].getNumBlocks() > 1):
-                self.topple(boardObj,Direction.LEFT)
+                topple(self.currPos,boardObj,Direction.LEFT)
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
                 boardObj.board[b_end].setChar()
@@ -53,7 +53,7 @@ class Character:
                 boardObj.board[b_end].setChar()
             if(boardObj.board[b_end].getNumBlocks() == 0 and
             boardObj.board[b_start].getNumBlocks() > 1):
-                self.topple(boardObj,Direction.RIGHT)
+                topple(self.currPos,boardObj,Direction.RIGHT)
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
                 boardObj.board[b_end].setChar()
@@ -70,55 +70,55 @@ class Character:
                 boardObj.board[b_end].setChar()
             if(boardObj.board[b_end].getNumBlocks() == 0 and 
             boardObj.board[b_start].getNumBlocks() > 1):
-                self.topple(boardObj,Direction.UP)
+                topple(self.currPos,boardObj,Direction.UP)
                 self.setCoor(nextCoor)
                 boardObj.board[b_start].setChar()
                 boardObj.board[b_end].setChar()
             return boardObj
-            return boardObj
     
-    # To topple the blocks
-    def topple(self, boardObj, direction):
-        blockInd = boardObj.findBlockWithCoor(self.currPos)
-        currBlock = boardObj.board[blockInd]
-        (x1,y1) = self.currPos
-        if (direction == Direction.DOWN):
-            x2 = x1 + currBlock.getNumBlocks() - 1 
-            (check, arr) = checkDown(x1,x2,y1,boardObj)
-            if (check == True):
-                for i in arr:
-                    boardObj.board[i].setNumBlocks(1)
-                currBlock.setNumBlocks(0)
-
-        elif (direction == Direction.LEFT):
-            y2 = y1 - currBlock.getNumBlocks()
-            (check, arr) = checkLeft(y1,y2,x1,boardObj)
-            if (check == True):
-                for i in arr:
-                    boardObj.board[i].setNumBlocks(1)
-                currBlock.setNumBlocks(0)
-
-        elif (direction == Direction.RIGHT):
-            y2 = y1 + currBlock.getNumBlocks()
-            (check, arr) = checkRight(y1,y2,x1,boardObj)
-            if (check == True):
-                for i in arr:
-                    boardObj.board[i].setNumBlocks(1)
-                currBlock.setNumBlocks(0)
-        
-        elif (direction == Direction.UP):
-            x2 = x1 - currBlock.getNumBlocks()
-            (check, arr) = checkUp(x1,x2,y1,boardObj)
-            if (check == True):
-                for i in arr:
-                    boardObj.board[i].setNumBlocks(1)
-                currBlock.setNumBlocks(0) 
 
     def getCoor(self):
         return self.currPos
     
     def setCoor(self, coor):
         self.currPos = coor
+
+# To topple the blocks
+def topple(currPos, boardObj, direction):
+    blockInd = boardObj.findBlockWithCoor(currPos)
+    currBlock = boardObj.board[blockInd]
+    (x1,y1) = currPos
+    if (direction == Direction.DOWN):
+        x2 = x1 + currBlock.getNumBlocks() - 1 
+        (check, arr) = checkDown(x1,x2,y1,boardObj)
+        if (check == True):
+            for i in arr:
+                boardObj.board[i].setNumBlocks(1)
+            currBlock.setNumBlocks(0)
+
+    elif (direction == Direction.LEFT):
+        y2 = y1 - currBlock.getNumBlocks()
+        (check, arr) = checkLeft(y1,y2,x1,boardObj)
+        if (check == True):
+            for i in arr:
+                boardObj.board[i].setNumBlocks(1)
+            currBlock.setNumBlocks(0)
+
+    elif (direction == Direction.RIGHT):
+        y2 = y1 + currBlock.getNumBlocks()
+        (check, arr) = checkRight(y1,y2,x1,boardObj)
+        if (check == True):
+            for i in arr:
+                boardObj.board[i].setNumBlocks(1)
+            currBlock.setNumBlocks(0)
+    
+    elif (direction == Direction.UP):
+        x2 = x1 - currBlock.getNumBlocks()
+        (check, arr) = checkUp(x1,x2,y1,boardObj)
+        if (check == True):
+            for i in arr:
+                boardObj.board[i].setNumBlocks(1)
+            currBlock.setNumBlocks(0) 
 
 ## Checks for blocks while toppling
 def checkUp(x1,x2,y1,boardObj):

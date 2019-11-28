@@ -22,10 +22,10 @@ def main():
     new_board.print_block_number()
     print("\n\n")
     while complete == False:
-        dir = dirConvert(input("Next Move (U,L,R,or D):"))
-        if dir == None:
-            continue
-        #dir = player.astar(new_board)
+        #dir = dirConvert(input("Next Move (U,L,R,or D):"))
+        #if dir == None:
+        #   continue
+        dir = player.astar(new_board)
         # print(dir)
 
         ## move should return a new board
