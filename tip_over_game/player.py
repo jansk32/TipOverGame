@@ -73,22 +73,37 @@ class Player:
             # Pop the currNode out of the open list into closed
             closed_list.append(currNode)
             open_list.pop(currNodeInd)
-
+            
             # If currNode is the finish block
             currBlockInd = boardObj.findBlockWithCoor(currNode.getCurr())
             currBlock = boardObj.board[currBlockInd]
-            if currBlock.getFinish() == True and currBlock.getChar() == True:
-                path = []
+#            print(currBlock.getFinish())
+            if currBlock.getFinish() == True:
+#                print("Finished")
+                nextStepNode = backTrack(currNode, startNode, closed_list)
+#                print("Made decision")
+                dir = nextStepNode.direction
                 return dir
 
             # Generate children
             tmpBoardObj = copy.deepcopy(boardObj)
-            children = currNode.generateStates(boardObj)
+            
+            children = currNode.generateStates()
+#            print("CURRENT:",currNode.getCurr())
+#            if currNode.getPrev() != None:
+#                print("PREVIOUS:", currNode.getPrev().getCurr())
+            currNode.boardObj.print_board()
             for node in children:
+#                print(node.getCurr())
+                isStuck = 0
+                # Stop the nodes that are the same
+                if node.getCurr() == node.getPrev().getCurr():
+                    isStuck = 999
+
                 if node in closed_list:
                     continue
                 node.setG(heuristics(currNode, node))
-                node.setH(heuristics(node, finishNode))
+                node.setH(isStuck + heuristics(node, finishNode))
                 node.setF(node.getG() + node.getH())
 
                 ## if child is in open_list
@@ -99,7 +114,7 @@ class Player:
 
                 ## Add child to open_list 
                 open_list.append(node)
-
+#            print("######################")
 
         return dir
 
@@ -123,9 +138,17 @@ def heuristics(node1, node2):
     (x2,y2) = node2.getCurr()
 
     distance = abs(x1-x2) + abs(y1-y2)
-    
+
     return distance
+ 
 
 # Back track function
-def backTrack(closedList):
-    return
+def backTrack(finalNode, startNode, closedList):
+    currPointer = finalNode.getPrev()
+    if currPointer.getPrev() == None:
+        return finalNode
+    else:
+        while currPointer.getPrev() != startNode:
+            currPointer = currPointer.getPrev()
+
+    return currPointer

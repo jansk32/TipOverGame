@@ -4,38 +4,42 @@ import copy
 
 class Node:
     
-    def __init__(self, curr, prev, boardObj):
+    def __init__(self, curr, prev, boardObj,dir=None):
         self.currCoor = curr
         self.prevNode = prev
         self.boardObj = boardObj
+        self.direction = dir
         self.f = self.g = self.h = 0
     
     # Generate states
-    def generateStates(self, boardObj):
+    def generateStates(self):
         arr = []
         (x,y) = self.currCoor
+        boardObj = self.boardObj
         prev = None
         if self.prevNode == None:
             prev = (-1,-1)
         else:
             prev = self.prevNode.getCurr()
 
-        if ((x+1,y) != prev and x+1 < 6 ):
+        if ((x+1,y) != prev and x+1 < 6):
             boardObj_new = copy.deepcopy(boardObj)
             nextCoor = (x+1,y)
             b_start = boardObj_new.findBlockWithCoor(self.currCoor)
             b_end = boardObj_new.findBlockWithCoor(nextCoor)
             if(x+1 < 6 and boardObj_new.board[b_end].getNumBlocks() > 0):
-                ## Unset the current coor
                 boardObj_new.board[b_start].setChar()
                 boardObj_new.board[b_end].setChar()
-            if(boardObj_new.board[b_end].getNumBlocks() == 0 and 
+                arr.append(Node((x+1,y), self, boardObj_new, Direction.DOWN))
+            elif(boardObj_new.board[b_end].getNumBlocks() == 0 and 
             boardObj_new.board[b_start].getNumBlocks() > 1):
-                topple(self.currCoor, boardObj_new,Direction.DOWN)
-                boardObj_new.board[b_start].setChar()
-                boardObj_new.board[b_end].setChar()
+                j = topple(self.currCoor, boardObj_new,Direction.DOWN)
+                if j == True:
+                    boardObj_new.board[b_start].setChar()
+                    boardObj_new.board[b_end].setChar()
+                    arr.append(Node((x+1,y), self, boardObj_new, Direction.DOWN))
             
-            arr.append(Node((x+1,y), self, boardObj_new))
+           
 
         if ((x-1,y) != prev and x-1 >= 0 and boardObj.findBlockWithCoor((x-1,y)) != 0):
             boardObj_new_u = copy.deepcopy(boardObj)
@@ -45,13 +49,16 @@ class Node:
             if(x-1 < 6 and boardObj_new_u.board[b_end].getNumBlocks() > 0):
                 boardObj_new_u.board[b_start].setChar()
                 boardObj_new_u.board[b_end].setChar()
-            if(boardObj_new_u.board[b_end].getNumBlocks() == 0 and 
-            boardObj_new_u.board[b_start].getNumBlocks() > 1):
-                topple(self.currCoor,boardObj_new_u,Direction.UP)
-                boardObj_new_u.board[b_start].setChar()
-                boardObj_new_u.board[b_end].setChar()
+                arr.append(Node((x-1,y), self, boardObj_new_u, Direction.UP))
 
-            arr.append(Node((x-1,y), self, boardObj_new_u))
+            elif(boardObj_new_u.board[b_end].getNumBlocks() == 0 and 
+            boardObj_new_u.board[b_start].getNumBlocks() > 1):
+                j = topple(self.currCoor,boardObj_new_u,Direction.UP)
+                if j == True:
+                    boardObj_new_u.board[b_start].setChar()
+                    boardObj_new_u.board[b_end].setChar()
+                    arr.append(Node((x-1,y), self, boardObj_new_u, Direction.UP))
+
 
         if ((x,y+1) != prev and y+1 < 6 and boardObj.findBlockWithCoor((x,y+1)) != 0):
             boardObj_new_r = copy.deepcopy(boardObj)
@@ -61,13 +68,16 @@ class Node:
             if(y+1 < 6 and boardObj_new_r.board[b_end].getNumBlocks() > 0):
                 boardObj_new_r.board[b_start].setChar()
                 boardObj_new_r.board[b_end].setChar()
-            if(boardObj_new_r.board[b_end].getNumBlocks() == 0 and
+                arr.append(Node((x,y+1), self, boardObj_new_r, Direction.RIGHT))
+            elif(boardObj_new_r.board[b_end].getNumBlocks() == 0 and
             boardObj_new_r.board[b_start].getNumBlocks() > 1):
-                topple(self.currCoor,boardObj_new_r,Direction.RIGHT)
-                boardObj_new_r.board[b_start].setChar()
-                boardObj_new_r.board[b_end].setChar()
+                j = topple(self.currCoor,boardObj_new_r,Direction.RIGHT)
+                if j == True:
+                    boardObj_new_r.board[b_start].setChar()
+                    boardObj_new_r.board[b_end].setChar()
+                    arr.append(Node((x,y+1), self, boardObj_new_r, Direction.RIGHT))
 
-            arr.append(Node((x,y+1), self, boardObj_new_r))
+
 
         if ((x,y-1) != prev and y-1 >= 0 and boardObj.findBlockWithCoor((x,y-1)) != 0):
             boardObj_new_l = copy.deepcopy(boardObj)
@@ -77,14 +87,18 @@ class Node:
             if(y-1 >= 0 and boardObj_new_l.board[b_end].getNumBlocks() > 0):
                 boardObj_new_l.board[b_start].setChar()
                 boardObj_new_l.board[b_end].setChar()
-            if(boardObj_new_l.board[b_end].getNumBlocks() == 0 and
+                arr.append(Node((x,y-1), self, boardObj_new_l, Direction.LEFT))
+            elif(boardObj_new_l.board[b_end].getNumBlocks() == 0 and
             boardObj_new_l.board[b_start].getNumBlocks() > 1):
-                topple(self.currCoor,boardObj_new_l,Direction.LEFT)
-                boardObj_new_l.board[b_start].setChar()
-                boardObj_new_l.board[b_end].setChar()
+                j = topple(self.currCoor,boardObj_new_l,Direction.LEFT)
+                if j == True:
+                    boardObj_new_l.board[b_start].setChar()
+                    boardObj_new_l.board[b_end].setChar()
+                    arr.append(Node((x,y-1), self, boardObj_new_l, Direction.LEFT))
 
-            arr.append(Node((x,y-1), self, boardObj_new_l))
-        
+            
+
+
         return arr
 
 
@@ -95,6 +109,9 @@ class Node:
     
     def getPrev(self):
         return self.prevNode
+    
+    def getDir(self):
+        return self.direction
 
     def getH(self):
         return self.h

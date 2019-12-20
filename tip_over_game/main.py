@@ -26,7 +26,7 @@ def main():
         #if dir == None:
         #   continue
         dir = player.astar(new_board)
-        # print(dir)
+        print("Selected Direction:",dir)
 
         ## move should return a new board
         new_board = new_board.moveChar(dir)
