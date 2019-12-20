@@ -21,13 +21,14 @@ def main():
     new_board.print_board()
     new_board.print_block_number()
     print("\n\n")
+    moves = []
     while complete == False:
         #dir = dirConvert(input("Next Move (U,L,R,or D):"))
         #if dir == None:
         #   continue
         dir = player.astar(new_board)
         print("Selected Direction:",dir)
-
+        moves.append(dirConvertReverse(dir))
         ## move should return a new board
         new_board = new_board.moveChar(dir)
         new_board.print_board()
@@ -40,6 +41,7 @@ def main():
             complete = True
     
     print("PUZZLE SOLVED!")
+    print("Moves to Solve: ", moves)
 
 # Converts the letters to directions
 def dirConvert(dir):
@@ -54,7 +56,18 @@ def dirConvert(dir):
         return Direction.RIGHT
     else:
         return None
-
+# Convert Directions, into words
+def dirConvertReverse(dir):
+    if dir == Direction.RIGHT:
+        return "RIGHT"
+    elif dir == Direction.LEFT:
+        return "LEFT"
+    elif dir == Direction.UP:
+        return "UP"
+    elif dir == Direction.DOWN:
+        return "DOWN"
+    else:
+        return "None"
 def setUpGame(boardObj, fileName):
     '''
     Format of CSV file

@@ -92,7 +92,7 @@ class Player:
 #            print("CURRENT:",currNode.getCurr())
 #            if currNode.getPrev() != None:
 #                print("PREVIOUS:", currNode.getPrev().getCurr())
-            currNode.boardObj.print_board()
+#            currNode.boardObj.print_board()
             for node in children:
 #                print(node.getCurr())
                 isStuck = 0
