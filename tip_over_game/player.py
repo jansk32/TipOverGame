@@ -80,10 +80,9 @@ class Player:
 #            print(currBlock.getFinish())
             if currBlock.getFinish() == True:
 #                print("Finished")
-                nextStepNode = backTrack(currNode, startNode, closed_list)
+                steps = backTrack(currNode, startNode)
 #                print("Made decision")
-                dir = nextStepNode.direction
-                return dir
+                return steps
 
             # Generate children
             tmpBoardObj = copy.deepcopy(boardObj)
@@ -143,12 +142,15 @@ def heuristics(node1, node2):
  
 
 # Back track function
-def backTrack(finalNode, startNode, closedList):
+def backTrack(finalNode, startNode):
+    arrDir = []
+    arrDir.append(finalNode.direction)
     currPointer = finalNode.getPrev()
     if currPointer.getPrev() == None:
         return finalNode
     else:
         while currPointer.getPrev() != startNode:
+            arrDir.append(currPointer.direction)
             currPointer = currPointer.getPrev()
-
-    return currPointer
+    arrDir.reverse()
+    return arrDir
