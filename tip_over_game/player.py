@@ -152,5 +152,6 @@ def backTrack(finalNode, startNode):
         while currPointer.getPrev() != startNode:
             arrDir.append(currPointer.direction)
             currPointer = currPointer.getPrev()
+    arrDir.append(currPointer.direction)
     arrDir.reverse()
     return arrDir
