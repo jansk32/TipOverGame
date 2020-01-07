@@ -13,7 +13,7 @@ def main():
 
     ## new_board.setUp('X', char.currPos)
     ## Set up for 4 (1,5) | 2 (2,5) | 2 (5,0) | 3 (2,0) | F (5,3)
-    finishCoor = setUpGame(new_board,"level_1.csv")
+    finishCoor = setUpGame(new_board,"level_3.csv")
     
     player = Player(new_board)
     new_board.print_board_coor()
@@ -22,23 +22,26 @@ def main():
     new_board.print_block_number()
     print("\n\n")
     moves = []
-    while complete == False:
+    #while complete == False:
         #dir = dirConvert(input("Next Move (U,L,R,or D):"))
         #if dir == None:
         #   continue
-        dir = player.astar(new_board)
-        print("Selected Direction:",dir)
-        moves.append(dirConvertReverse(dir))
-        ## move should return a new board
-        new_board = new_board.moveChar(dir)
-        new_board.print_board()
-        new_board.print_block_number()
-        print("\n\n")
+    steps = player.astar(new_board)
+    for step in steps:
+        moves.append(dirConvertReverse(step))
+    #print("Selected Direction:",dir)
+    #moves.append(dirConvertReverse(dir))
 
-        # Check to see if player reached goal
-        fBlock = new_board.findBlockWithCoor(finishCoor)
-        if new_board.board[fBlock].getChar() == True:
-            complete = True
+    ## move should return a new board
+    #new_board = new_board.moveChar(dir)
+    #new_board.print_board()
+    #new_board.print_block_number()
+    #print("\n\n")
+
+    # Check to see if player reached goal
+    #fBlock = new_board.findBlockWithCoor(finishCoor)
+    #if new_board.board[fBlock].getChar() == True:
+    #    complete = True
     
     print("PUZZLE SOLVED!")
     print("Moves to Solve: ", moves)
